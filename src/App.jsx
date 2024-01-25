@@ -1,10 +1,12 @@
 import Searchbar from "./components/SearchBar";
+import WeatherSummary from "./components/WeatherSummary";
 
 function App() {
   return (
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignContent: "center",
         padding: "100px",
@@ -14,6 +16,7 @@ function App() {
       className="app"
     >
       <Searchbar />
+      <WeatherSummary />
     </div>
   );
 }
