@@ -1,5 +1,4 @@
-function WeatherTemp() {
-  const temp = "50°";
+function WeatherTemp({ temp }) {
   return (
     <div className="weather-summary__temp text-8xl font-thin text-black">
       {temp}
