@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 function App() {
   const [city, setCity] = useState("Chattanooga");
   const [data, setData] = useState(0);
+  const [dropdownList, setDropdownList] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   function getWeatherByCity(city) {
     return fetch(
@@ -36,9 +38,18 @@ function App() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setDropdownList(data);
         return data;
       });
+  }
+
+  function handleGlobalClick(event) {
+    if (event.target.id !== "search-box") {
+      setIsSearching(false);
+      setDropdownList([]);
+      return;
+    }
+    return;
   }
 
   useEffect(() => {
@@ -70,6 +81,14 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getWeatherByCity(city);
+      setData(data);
+    }
+    fetchData();
+  }, [city]);
+
   return (
     <div
       style={{
@@ -80,8 +99,12 @@ function App() {
         fontWeight: "100",
       }}
       className="app flex flex-column"
+      onClick={(event) => handleGlobalClick(event)}
     >
       <Searchbar
+        isSearching={isSearching}
+        setIsSearching={setIsSearching}
+        dropdownList={dropdownList}
         setCity={setCity}
         city={city}
         data={data}
