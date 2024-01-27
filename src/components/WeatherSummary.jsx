@@ -4,7 +4,7 @@ import WeatherTemp from "./WeatherTemp";
 
 const WeatherSummary = ({ data }) => {
   const style = {
-    width: "500px",
+    width: "600px",
   };
   const units = "f";
 
@@ -12,12 +12,14 @@ const WeatherSummary = ({ data }) => {
   let wind;
   let humidity;
   let chanceOfRain;
+  let condition = " ";
 
   if (data) {
     temp = units === "f" ? data.current.temp_f : data.current.temp_c;
     wind = data.current.wind_mph;
     humidity = data.current.humidity;
     chanceOfRain = data.forecast.forecastday[0].day.daily_chance_of_rain;
+    condition = data.current.condition.text.toLowerCase();
   }
 
   return (
@@ -25,7 +27,7 @@ const WeatherSummary = ({ data }) => {
       style={style}
       className="weather-summary flex items-center justify-between m-auto font-normal text-gray-500"
     >
-      <ConditionIcon />
+      <ConditionIcon condition={condition} />
       <WeatherTemp temp={temp} />
       <WeatherDetails
         wind={wind}

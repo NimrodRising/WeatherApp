@@ -1,7 +1,7 @@
 function WeatherTemp({ temp }) {
   return (
     <div className="weather-summary__temp text-8xl font-thin text-black">
-      {temp}
+      {temp}°
     </div>
   );
 }

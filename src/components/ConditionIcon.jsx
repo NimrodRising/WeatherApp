@@ -1,9 +1,31 @@
-import sunny from "../icons/sunny.svg";
+import { useState, useEffect } from "react";
+import { Suspense } from "react";
 
-function ConditionIcon() {
+function ConditionIcon({ condition }) {
+  const [icon, setIcon] = useState("");
+
+  useEffect(() => {
+    async function getIcon() {
+      let importedIcon = await import(
+        `../icons/${condition.replace(/\s/g, "")}.svg`
+      ).catch(() => {
+        setIcon("");
+        return;
+      });
+      if (importedIcon) {
+        setIcon(importedIcon.default);
+      } else {
+        setIcon("");
+      }
+    }
+    getIcon();
+  });
+
   return (
     <div className="weather-summary__icon">
-      <img src={sunny} className="w-44" alt="" />
+      <Suspense fallback={<div>no icon</div>}>
+        <img className="w-44" src={icon} />
+      </Suspense>
     </div>
   );
 }
