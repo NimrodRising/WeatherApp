@@ -1,10 +1,14 @@
+import DropdownItem from "./DropdownItem";
+
 const phrases = {
   sunny: "it's sunny.",
+  clear: "it's clear",
   "partly cloudy": "it's partly cloudy.",
   cloudy: "it's cloudy.",
   overcast: "it's overcast.",
   mist: "there's mist.",
   "patchy rain possible": "there's patchy rain possible.",
+  "patchy rain nearby": "there's patchy rain nearby.",
   "patchy snow possible": "there's patchy snow possible.",
   "patchy sleet possible": "there's patchy sleet possible.",
   "patchy freezing drizzle possible":
@@ -70,6 +74,8 @@ const Searchbar = ({
     condition = data.current.condition.text.toLowerCase();
   }
 
+  console.log(phrases[condition]);
+  console.log(condition);
   return (
     <div
       className="flex flex-column items-center m-auto"
@@ -84,8 +90,13 @@ const Searchbar = ({
             id="search-box"
             contentEditable={true}
             className={`font-normal outline-none ml-3.5 ${
-              isSearching ? "bg-gray border border-black w-60" : ""
+              isSearching ? "bg-gray border border-black min-w-60" : ""
             }`}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+              }
+            }}
             // style={style}
             onClick={() => setIsSearching(true)}
           >
@@ -93,19 +104,13 @@ const Searchbar = ({
           </li>
           {dropdownList.length > 0 ? (
             <ul className="absolute flex flex-col text-black w-60 cursor-pointer  ml-3.5 ">
-              {console.log(Object.keys(dropdownList))}
               {Object.keys(dropdownList).map((key, i) => (
-                <li
-                  className="bg-white border-black border w-30 hover:bg-gray-200"
+                <DropdownItem
                   key={i}
-                  onClick={() =>
-                    setCity(
-                      `${dropdownList[key].name}, ${dropdownList[key].region}`
-                    )
-                  }
-                >
-                  {`${dropdownList[key].name}, ${dropdownList[key].region}`}
-                </li>
+                  name={dropdownList[key].name}
+                  region={dropdownList[key].region}
+                  setCity={setCity}
+                />
               ))}
             </ul>
           ) : null}
@@ -115,5 +120,4 @@ const Searchbar = ({
     </div>
   );
 };
-
 export default Searchbar;
