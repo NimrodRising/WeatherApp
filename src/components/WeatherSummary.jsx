@@ -13,6 +13,7 @@ const WeatherSummary = ({ data }) => {
   let humidity;
   let chanceOfRain;
   let condition = " ";
+  let timeOfDay;
 
   if (data) {
     temp = units === "f" ? data.current.temp_f : data.current.temp_c;
@@ -20,6 +21,9 @@ const WeatherSummary = ({ data }) => {
     humidity = data.current.humidity;
     chanceOfRain = data.forecast.forecastday[0].day.daily_chance_of_rain;
     condition = data.current.condition.text.toLowerCase();
+    console.log(data);
+    timeOfDay = data.current.is_day === 1 ? "day" : "night";
+    console.log(timeOfDay);
   }
 
   return (
@@ -27,7 +31,7 @@ const WeatherSummary = ({ data }) => {
       style={style}
       className="weather-summary flex items-center justify-between m-auto font-normal text-gray-500"
     >
-      <ConditionIcon condition={condition} />
+      <ConditionIcon condition={condition} timeOfDay={timeOfDay} />
       <WeatherTemp temp={temp} />
       <WeatherDetails
         wind={wind}

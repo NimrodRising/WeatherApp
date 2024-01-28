@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Suspense } from "react";
 
-function ConditionIcon({ condition }) {
+function ConditionIcon({ condition, timeOfDay }) {
   const [icon, setIcon] = useState("");
 
   useEffect(() => {
     async function getIcon() {
       let importedIcon = await import(
-        `../icons/${condition.replace(/\s/g, "")}.svg`
+        `../icons/${condition.replace(/\s/g, "")}-${timeOfDay}.svg`
       ).catch(() => {
         setIcon("");
         return;
