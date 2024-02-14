@@ -64,7 +64,6 @@ function App() {
             return;
           }
           setCity(data.city);
-          console.log(city);
           return data.city;
         });
     }

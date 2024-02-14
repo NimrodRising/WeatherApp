@@ -74,8 +74,6 @@ const Searchbar = ({
     condition = data.current.condition.text.toLowerCase();
   }
 
-  console.log(phrases[condition]);
-  console.log(condition);
   return (
     <div
       className="flex flex-column items-center m-auto"
@@ -88,6 +86,7 @@ const Searchbar = ({
         <ul className="relative">
           <li
             id="search-box"
+            suppressContentEditableWarning={true}
             contentEditable={true}
             className={`font-normal outline-none ml-3.5 ${
               isSearching ? "bg-gray border border-black min-w-60" : ""
@@ -97,7 +96,6 @@ const Searchbar = ({
                 event.preventDefault();
               }
             }}
-            // style={style}
             onClick={() => setIsSearching(true)}
           >
             {isSearching ? "" : city}
