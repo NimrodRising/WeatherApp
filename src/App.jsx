@@ -1,3 +1,4 @@
+import HourlyChart from "./components/HourlyCharts";
 import Searchbar from "./components/Searchbar";
 import WeatherSummary from "./components/WeatherSummary";
 import { useState, useEffect } from "react";
@@ -110,6 +111,7 @@ function App() {
         getCitiesForDropdown={getCitiesForDropdown}
       />
       <WeatherSummary data={data} />
+      <HourlyChart data={data} />
     </div>
   );
 }
