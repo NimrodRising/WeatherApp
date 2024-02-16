@@ -1,18 +1,18 @@
 function WeatherTemp({ temp, units, setUnits }) {
   return (
-    <div className="weather-summary__temp text-8xl font-thin text-black flex">
+    <div className="weather-summary__temp text-8xl font-thin text-gray-300 flex">
       {temp}
-      <div className="text-base font-medium text-slate-400">
+      <div className="text-base font-normal text-gray-400">
         <span
           onClick={() => setUnits("F")}
-          className={units == "F" ? "text-black" : ""}
+          className={units == "F" ? "text-white" : ""}
         >
           °F{" "}
         </span>
         |
         <span
           onClick={() => setUnits("C")}
-          className={units == "C" ? "text-black" : ""}
+          className={units == "C" ? "text-white" : ""}
         >
           {" "}
           °C

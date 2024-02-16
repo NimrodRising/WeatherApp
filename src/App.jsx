@@ -1,4 +1,4 @@
-import HourlyChart from "./components/HourlyCharts";
+import ChartMenu from "./components/ChartMenu";
 import Searchbar from "./components/Searchbar";
 import WeatherSummary from "./components/WeatherSummary";
 import { useState, useEffect } from "react";
@@ -97,8 +97,9 @@ function App() {
         padding: "100px",
         fontSize: "35px",
         fontWeight: "100",
+        backgroundColor: "#292929",
       }}
-      className="app flex flex-column"
+      className="app flex flex-column "
       onClick={(event) => handleGlobalClick(event)}
     >
       <Searchbar
@@ -111,7 +112,7 @@ function App() {
         getCitiesForDropdown={getCitiesForDropdown}
       />
       <WeatherSummary data={data} />
-      <HourlyChart data={data} />
+      <ChartMenu data={data} />
     </div>
   );
 }

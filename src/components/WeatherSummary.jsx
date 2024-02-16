@@ -28,7 +28,7 @@ const WeatherSummary = ({ data }) => {
   return (
     <div
       style={style}
-      className="weather-summary cursor-default select-none  flex items-center justify-between m-auto font-normal text-gray-500"
+      className="weather-summary cursor-default select-none  flex items-center justify-between m-auto font-normal text-gray-400"
     >
       <ConditionIcon condition={condition} timeOfDay={timeOfDay} />
       <WeatherTemp temp={temp} units={units} setUnits={setUnits} />

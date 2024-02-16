@@ -81,7 +81,7 @@ const Searchbar = ({
         getCitiesForDropdown(event.target.textContent);
       }}
     >
-      <div className="search-bar flex cursor-default select-none">
+      <div className="search-bar flex cursor-default select-none text-white">
         Right now in{" "}
         <ul className="relative">
           <li
@@ -101,7 +101,7 @@ const Searchbar = ({
             {isSearching ? "" : city}
           </li>
           {dropdownList.length > 0 ? (
-            <ul className="absolute flex flex-col text-black w-60 cursor-pointer  ml-3.5 ">
+            <ul className="absolute flex flex-col text-gray-500 w-60 cursor-pointer ml-3.5 ">
               {Object.keys(dropdownList).map((key, i) => (
                 <DropdownItem
                   key={i}
