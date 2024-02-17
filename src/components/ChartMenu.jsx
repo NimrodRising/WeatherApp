@@ -6,17 +6,6 @@ import { useState } from "react";
 function ChartMenu({ data }) {
   const [selection, setSelection] = useState("temp");
 
-  function displayChart(selection) {
-    switch (selection) {
-      case "temp":
-        console.log("qqfef");
-        return <TempChart data={data} />;
-      case "precip":
-        return <PrecipitationChart />;
-      case "wind":
-        return <WindChart />;
-    }
-  }
   return (
     <div className="w-fit mx-auto cursor-pointer select-none">
       <ul className="flex text-xs gap-2 text-gray-300 font-light mt-10">
