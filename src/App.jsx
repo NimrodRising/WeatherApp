@@ -11,7 +11,7 @@ function App() {
 
   function getWeatherByCity(city) {
     return fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=7e72971ce6c047b5a8d70821242501&q=${city}&days=1&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=7e72971ce6c047b5a8d70821242501&q=${city}&days=1&aqi=no&alerts=no`
     )
       .then((response) => {
         return response.text();
@@ -35,7 +35,7 @@ function App() {
 
   function getCitiesForDropdown(search) {
     return fetch(
-      ` http://api.weatherapi.com/v1/search.json?key=7e72971ce6c047b5a8d70821242501&q=${search}`
+      ` https://api.weatherapi.com/v1/search.json?key=7e72971ce6c047b5a8d70821242501&q=${search}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -56,7 +56,7 @@ function App() {
   useEffect(() => {
     function getCityByIP(IP) {
       return fetch(
-        `http://api.weatherapi.com/v1/ip.json?key=7e72971ce6c047b5a8d70821242501&q=${IP}`
+        `https://api.weatherapi.com/v1/ip.json?key=7e72971ce6c047b5a8d70821242501&q=${IP}`
       )
         .then((response) => response.text())
         .then((data) => JSON.parse(data))
