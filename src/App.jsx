@@ -1,6 +1,6 @@
-import ChartMenu from "./components/ChartMenu";
-import Searchbar from "./components/Searchbar";
-import WeatherSummary from "./components/WeatherSummary";
+import ChartMenu from "./components/ChartMenu.jsx";
+import Searchbar from "./components/Searchbar.jsx";
+import WeatherSummary from "./components/WeatherSummary.jsx";
 import { useState, useEffect } from "react";
 
 function App() {
