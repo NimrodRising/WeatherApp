@@ -6,14 +6,15 @@ export default function HourlyChart({ data, selection }) {
   useEffect(() => {
     console.log(data);
     if (data.forecast) {
-      console.log(data.location.localtime.slice(11));
+      const localTime = parseInt(data.location.localtime.slice(11, 13));
       let temps = data.forecast.forecastday[0].hour.map((hour, i) => {
         return {
           hour: `${i}`,
           value: hour.temp_f,
         };
       });
-      setTempData(temps.slice(16));
+
+      setTempData(temps.slice(localTime, localTime + 8));
     }
   }, [data]);
   return (
@@ -55,7 +56,11 @@ export default function HourlyChart({ data, selection }) {
           : tempData.map((temp, i) => {
               return (
                 <li key={i} className="">
-                  {temp.hour % 12} PM
+                  {console.log(`HOUR: ${temp.hour}`)}
+                  {temp.hour === "12" || temp.hour === "12"
+                    ? 12
+                    : temp.hour % 12}{" "}
+                  {temp.hour >= 12 && temp.hour < 24 ? "PM" : "AM"}
                 </li>
               );
             })}

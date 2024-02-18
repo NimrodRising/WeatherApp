@@ -1,3 +1,4 @@
+import { useState } from "react";
 import DropdownItem from "./DropdownItem";
 
 const phrases = {
@@ -68,6 +69,7 @@ const Searchbar = ({
   isSearching,
   setIsSearching,
 }) => {
+  const [isHovering, setIsHovering] = useState(false);
   let condition;
 
   if (data) {
@@ -90,13 +92,19 @@ const Searchbar = ({
             contentEditable={true}
             className={`font-normal outline-none ml-3.5 ${
               isSearching ? "bg-gray border border-black min-w-60" : ""
-            }`}
+            } ${isHovering && !isSearching ? " underline" : ""}`}
             onKeyDown={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
               }
             }}
             onClick={() => setIsSearching(true)}
+            onMouseEnter={() => {
+              setIsHovering(true);
+            }}
+            onMouseLeave={() => {
+              setIsHovering(false);
+            }}
           >
             {isSearching ? "" : city}
           </li>

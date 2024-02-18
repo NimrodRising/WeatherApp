@@ -20,9 +20,10 @@ function WindChart({ selection, data }) {
   }
 
   useEffect(() => {
-    console.log(data);
     if (data.forecast) {
-      console.log(data.location.localtime.slice(11));
+      const localTime = parseInt(data.location.localtime.slice(11, 13));
+      console.log("LOCAL TIME: ");
+      console.log(localTime);
       let winds = data.forecast.forecastday[0].hour.map((hour, i) => {
         return {
           hour: `${i}`,
@@ -30,7 +31,7 @@ function WindChart({ selection, data }) {
           speed: hour.wind_mph,
         };
       });
-      setWindData(winds.slice(16));
+      setWindData(winds.slice(localTime, localTime + 8));
     }
   }, [data]);
 
@@ -51,7 +52,11 @@ function WindChart({ selection, data }) {
                 </aside>
                 <img className="w-10 " src={arrow} style={windStyle(wind)} />
                 <aside className="text-xs text-gray-500">
-                  {wind.hour % 12} PM
+                  {console.log(`HOUR: ${wind.hour}`)}
+                  {wind.hour === "12" || wind.hour === "12"
+                    ? 12
+                    : wind.hour % 12}{" "}
+                  {wind.hour >= 12 && wind.hour < 24 ? "PM" : "AM"}
                 </aside>
               </li>
             );

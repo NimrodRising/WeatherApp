@@ -2,21 +2,19 @@ import { BarChart, Bar, LabelList } from "recharts";
 import { useEffect, useState } from "react";
 
 function PrecipitationChart({ selection, data }) {
-  const [tempData, setTempData] = useState(null);
+  const [precipData, setPrecipData] = useState(null);
 
   useEffect(() => {
     console.log(data);
     if (data.forecast) {
-      console.log(data.location.localtime.slice(11));
+      const localTime = parseInt(data.location.localtime.slice(11, 13));
       let temps = data.forecast.forecastday[0].hour.map((hour, i) => {
         return {
           hour: `${i}`,
           value: hour.precip_mm,
         };
       });
-      console.log("TEMPS TEMPS TEMPS");
-      console.log(temps);
-      setTempData(temps.slice(16));
+      setPrecipData(temps.slice(localTime, localTime + 8));
     }
   }, [data]);
   return (
@@ -26,18 +24,27 @@ function PrecipitationChart({ selection, data }) {
           selection === "precip" ? "" : "hidden"
         }`}
       >
-        <BarChart width={600} height={100} margin={{ top: 20 }} data={tempData}>
+        <BarChart
+          width={600}
+          height={100}
+          margin={{ top: 20 }}
+          data={precipData}
+        >
           <Bar dataKey="value" fill="#FFCC00" opacity={0.3}>
             <LabelList dataKey="value" position="top" fontSize={10} />
           </Bar>
         </BarChart>
         <ul className="flex text-xs text-gray-500 font-medium justify-around w-100">
-          {tempData == null
+          {precipData == null
             ? null
-            : tempData.map((temp, i) => {
+            : precipData.map((precip, i) => {
                 return (
                   <li key={i} className="">
-                    {temp.hour % 12} PM
+                    {console.log(`HOUR: ${precip.hour}`)}
+                    {precip.hour === "12" || precip.hour === "12"
+                      ? 12
+                      : precip.hour % 12}{" "}
+                    {precip.hour >= 12 && precip.hour < 24 ? "PM" : "AM"}
                   </li>
                 );
               })}
